@@ -17,18 +17,21 @@
   ],
   "_$child": [
     {
-      "_$id": "rhhu2e95",
-      "_$var": true,
+      "_$id": "89vq5xmg",
       "_$type": "Sprite",
-      "name": "HSeperator",
+      "name": "BG",
       "x": 960,
-      "width": 10,
+      "y": 540,
+      "width": 1920,
       "height": 1080,
       "anchorX": 0.5,
+      "anchorY": 0.5,
       "texture": {
-        "_$uuid": "72d51997-7bc6-4986-84d7-cc5b81b7c361",
+        "_$uuid": "52fd1670-17c7-475f-aea8-aaa3622f651e",
         "_$type": "Texture"
-      }
+      },
+      "drawCallOptimize": true,
+      "cacheAs": "bitmap"
     }
   ]
 }

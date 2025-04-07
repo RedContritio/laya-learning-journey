@@ -1,9 +1,6 @@
 {
-  "uuid": "72d51997-7bc6-4986-84d7-cc5b81b7c361",
+  "uuid": "d71d6e53-d4e1-48c5-872d-c554730e4aed",
   "importer": {
-    "textureType": 2,
-    "alphaChannel": true,
-    "wrapMode": 0,
-    "filterMode": 0
+    "textureType": 2
   }
 }
