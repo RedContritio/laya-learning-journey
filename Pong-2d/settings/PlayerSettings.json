@@ -2,11 +2,19 @@
   "resolution": {
     "designWidth": 1920,
     "designHeight": 1080,
+    "scaleMode": "fixedwidth",
     "backgroundColor": "rgba(0, 0, 0, 1)"
+  },
+  "physics2D": {
+    "gravity": {
+      "x": 0,
+      "y": 0
+    }
   },
   "modules": {
     "laya.ui": true,
-    "laya.d3": true
+    "laya.d3": true,
+    "laya.physics2D": true
   },
   "splash": {
     "fit": "center"
