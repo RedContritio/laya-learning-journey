@@ -40,6 +40,7 @@
           "_$id": "aqvv",
           "_$type": "ChainCollider",
           "restitution": 1,
+          "isSensor": true,
           "label": "wall",
           "datas": [
             0,
@@ -52,6 +53,30 @@
             0
           ],
           "loop": true
+        },
+        {
+          "_$id": "bnic",
+          "_$type": "EdgeCollider",
+          "isSensor": true,
+          "label": "playerDeadZone",
+          "datas": [
+            0,
+            0,
+            0,
+            1080
+          ]
+        },
+        {
+          "_$id": "nvru",
+          "_$type": "EdgeCollider",
+          "isSensor": true,
+          "label": "npcDeadZone",
+          "datas": [
+            1920,
+            0,
+            1920,
+            1080
+          ]
         }
       ]
     },
