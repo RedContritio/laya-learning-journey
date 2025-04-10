@@ -87,8 +87,6 @@ export class Main extends Laya.Script {
         
         BG.on(Laya.Event.MOUSE_MOVE, this, this.onPlayerBoardDragMove);
         BG.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown);
-
-        this.ball.on(Laya.Event.COLLISION_EXIT, this, this.onBallCollisionExit);
         
         this.isBallLaunched = false;
     }
@@ -108,7 +106,7 @@ export class Main extends Laya.Script {
         let delta: Laya.Vector2 = subtractVector2(current, this.cachedInput);
         this.cachedInput = current;
 
-        console.log("PlayerBoard drag move", delta.x, delta.y);
+        // console.log("PlayerBoard drag move", delta.x, delta.y);
         
         delta.y *= this.vmoveFactor;
         this.moveBoardVertically(this.playerBoard, delta);
@@ -127,6 +125,8 @@ export class Main extends Laya.Script {
     }
 
     onBallCollisionExit(other: Laya.Sprite & {label: string}): void {
+        console.log("Ball collision exit", other.label);
+
         if (other.label == "wall") {
             if (this.ball.x < 0) {
                 this.npcScore += 1;
@@ -139,14 +139,21 @@ export class Main extends Laya.Script {
             return;
         } else {
             let v = this.ball.getComponent(Laya.RigidBody).linearVelocity;
-            let v_length = Math.sqrt(v.x * v.x + v.y * v.y);
-            if (Math.abs(v.x) < this.ballMinSpeed.x || Math.abs(v.y) < this.ballMinSpeed.y) {
-                let scale = Math.min(this.ballMinSpeed.x / (v.x + 1e-5), this.ballMinSpeed.y / (v.y + 1e-5));
-                v.x = scale * v.x;
-                v.y = scale * v.y;
-                v.x = this.ballMinSpeed.x * v.x / 1e-5;
-                v.y = this.ballMinSpeed.y * v.y / 1e-5;
+            
+            // 增加速度
+            let speed = Math.sqrt(v.x * v.x + v.y * v.y);
+            let maxSpeed = Math.sqrt(this.ballMaxSpeed.x * this.ballMaxSpeed.x + this.ballMaxSpeed.y * this.ballMaxSpeed.y);
+            let minSpeed = Math.sqrt(this.ballMinSpeed.x * this.ballMinSpeed.x + this.ballMinSpeed.y * this.ballMinSpeed.y);
+            let speedFactor = 1.05;
+            if (speed < minSpeed) {
+                speedFactor = Math.sqrt(minSpeed / speed);
+            } else if (speed > maxSpeed) {
+                speedFactor = Math.sqrt(maxSpeed / speed);
             }
+            v.x *= speedFactor;
+            v.y *= speedFactor;
+            this.ball.getComponent(Laya.RigidBody).setVelocity(v);
+            console.log("Ball speed", speed, v.x, v.y);
         }
     }
 

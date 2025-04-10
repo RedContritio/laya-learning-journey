@@ -12,6 +12,8 @@ export class Ball extends Laya.Script {
             console.error("Ball width and height must be equal.");
             return;
         }
+
+        owner.on(Laya.Event.TRIGGER_ENTER, this, this.onTriggerEnter);
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
@@ -28,7 +30,8 @@ export class Ball extends Laya.Script {
 
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     onUpdate(): void {
-        
+        let stage = Laya.stage;
+
     }
 
     //每帧更新时执行，在update之后执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
@@ -36,4 +39,16 @@ export class Ball extends Laya.Script {
 
     //鼠标点击后执行。与交互相关的还有onMouseDown等十多个函数，具体请参阅文档。
     //onMouseClick(): void {}
+
+    onTriggerEnter(other: (Laya.PhysicsColliderComponent | Laya.ColliderBase) & {label?: string}, self?: Laya.ColliderBase & {label?: string}, contact?: any): void {
+        console.log("Ball collision enter", other.label, self.label, contact);
+        // if (other.label == "wall") {
+        //     this.owner.event("ballCollisionExit", other);
+        //     console.log("Ball collision exit", other.label);
+        //     return;
+        // } else if (other.label == "board") {
+        //     this.owner.event("ballCollisionEnter", other);
+        //     return;
+        // }
+    }
 }
